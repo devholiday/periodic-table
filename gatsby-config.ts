@@ -15,7 +15,7 @@ const config: GatsbyConfig = {
   plugins: [
     {
       resolve: `gatsby-source-mongodb`,
-      options: { connectionString: process.env.CONNECTION_STRING, dbName: process.env.DB_NAME, collection: process.env.COLLECTION?.split(',') }
+      options: { connectionString: process.env.CONNECTION_STRING, dbName: process.env.DB_NAME, collection: process.env.COLLECTION?.split(','), preserveObjectIds: true}
     },
   ],
 }
