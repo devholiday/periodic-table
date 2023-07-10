@@ -3,18 +3,36 @@ import { HeadFC, PageProps, graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+import * as styles from "../styles/grid.module.css"
+
 const Home:React.FC<PageProps> = ({data}) => {
+  const grid = [];
+
+  for (let i=1; i < 9; i++) {
+    for (let j=1; j < 19; j++) {
+      grid.push(data.allMongodbPeriodicTableElements.nodes.find(node => node.period === i && node.group === j));
+    } 
+  }
+
   return (
     <Layout pageTitle="Periodic Elements">
-      <ul>
-      {
-        data.allMongodbPeriodicTableElements.nodes.map(node => (
-          <li key={node.name} style={{background: '#'+node.elementGroup.bgColor}}>
-            {node.name}
-          </li>
-        ))
-      }
-      </ul>
+      <div className={styles.gridContainer}>
+        {
+          grid.map((element, i) => (
+            <div key={i} className={styles.gridItem}>
+              {element && (
+                <div className={styles.item} style={{background: `linear-gradient(110deg, rgba(${element.elementGroup.bgColorRGB}, 0.2), rgba(${element.elementGroup.bgColorRGB}, 0.3)`}}>
+                  {element.name}
+                </div>
+              )}
+
+              {!element && (
+                <div></div>
+              )}
+            </div>
+          ))
+        }
+      </div>
     </Layout>
   )
 }
@@ -29,10 +47,13 @@ export const query = graphql`
         name
         symbol
         atomicNumber
+        group
+        period
         elementGroup {
           name
           bgColor
           borderColor
+          bgColorRGB
         }
       }
     }

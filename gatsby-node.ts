@@ -1,11 +1,12 @@
 exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
     const typeDefs = `
-      type ElementGroupJson implements Node {
-        name: String!
-        bgColor: String!
-        borderColor: String!
-      }
+        type ElementGroupJson {
+            name: String!
+            bgColor: String!
+            borderColor: String!
+            bgColorRGB: String
+        }
     `
     createTypes(typeDefs)
 }
@@ -23,7 +24,16 @@ exports.createResolvers = ({ createResolvers }) => {
                         } 
                     });
 
-                    return group;
+
+                    const result = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(group.bgColor);
+                    const bgColorRGB = result ? parseInt(result[1], 16)+','+parseInt(result[2], 16)+','+parseInt(result[3], 16) : null;
+
+                    return {
+                        name: group.name,
+                        bgColor: group.bgColor,
+                        borderColor: group.borderColor,
+                        bgColorRGB
+                    };
                 },
             },
         },
