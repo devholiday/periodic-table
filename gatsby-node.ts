@@ -1,4 +1,6 @@
-exports.createSchemaCustomization = ({ actions }) => {
+import { GatsbyNode } from "gatsby"
+
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
     const { createTypes } = actions
     const typeDefs = `
         type ElementGroupJson {
@@ -11,7 +13,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     createTypes(typeDefs)
 }
 
-exports.createResolvers = ({ createResolvers }) => {
+export const createResolvers: GatsbyNode["createResolvers"] = ({ createResolvers }) => {
     createResolvers({
         mongodbPeriodic_tableElements: {
             elementGroup: {

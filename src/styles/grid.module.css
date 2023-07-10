@@ -4,12 +4,12 @@
     grid-template-columns: repeat(18, 80px);
     grid-template-rows: repeat(7, 80px);
 }
+.gridContainerWOGroup {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(15, 80px);
+    grid-template-rows: repeat(2, 80px);
+}
 .gridItem {
     display: block;
-}
-
-.item {
-    height: 100%;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.05) inset;
 }
