@@ -5,8 +5,17 @@ export type NodeType = {
     symbol: string
     atomicMass: string
     atomicNumber: number
+    meltingPoint: number
+    boilingPoint: number
+    description: string
+    block: string
+    discoveryDate: number
+    discoveredBy: string
     elementGroup: {
       name: string
+      bgColor: string
+      borderColor: string
       bgColorRGB: string
+      borderColorRGB: string
     }
 }

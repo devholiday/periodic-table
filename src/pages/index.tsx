@@ -1,8 +1,11 @@
 import * as React from "react"
+import { createPortal } from "react-dom";
 import { HeadFC, PageProps, graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Element from "../components/element"
+import Modal from "../components/modal";
+import ModalElement from "../components/modal-element";
 import { NodeType } from "../types/node"
 import * as styles from "../styles/grid.module.css"
 
@@ -15,6 +18,10 @@ type Data = {
 }
 
 const Home:React.FC<PageProps&Data> = ({data}) => {
+  const [element, setElement] = React.useState<NodeType|undefined>();
+  const [activeElement, setActiveElement] = React.useState(false);
+  const handleChangeElement = React.useCallback(() => setActiveElement(!activeElement), [activeElement]);
+
   const grid = [];
   const gridWithEmptyGroup = [];
 
@@ -30,28 +37,46 @@ const Home:React.FC<PageProps&Data> = ({data}) => {
     gridWithEmptyGroup.push(data.allMongodbPeriodicTableElements.nodes.find((n:NodeType) => n.atomicNumber === i));
   }
 
-  return (
-    <Layout pageTitle="Periodic Table of Elements">
-      <div className={styles.gridContainer}>
-        {
-          grid.map((element, i) => (
-            <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
-              {element ? <Element element={element} /> : <div></div>}
-            </div>
-          ))
-        }
-      </div>
+  const showElement = (element: NodeType): void => {
+    setElement(element);
+    handleChangeElement();
+  };
 
-      <div className={styles.gridContainerWOGroup}>
-        {
-          gridWithEmptyGroup.map((element, i) => (
-            <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
-              {element && <Element element={element} /> }
-            </div>
-          ))
-        }
-      </div>
-    </Layout>
+  return (
+    <>
+     {activeElement && createPortal(
+          <Modal
+              open={activeElement}
+              onClose={handleChangeElement}
+              title="Element properties"
+          >
+              <ModalElement element={element} />
+          </Modal>,
+          document.body
+      )}   
+
+      <Layout pageTitle="Periodic Table of Elements">
+        <div className={styles.gridContainer}>
+          {
+            grid.map((element, i) => (
+              <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
+                {element ? <Element showElement={showElement} element={element} /> : <div></div>}
+              </div>
+            ))
+          }
+        </div>
+
+        <div className={styles.gridContainerWOGroup}>
+          {
+            gridWithEmptyGroup.map((element, i) => (
+              <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
+                {element && <Element showElement={showElement} element={element} /> }
+              </div>
+            ))
+          }
+        </div>
+      </Layout>
+    </>
   )
 }
 export default Home
@@ -68,11 +93,18 @@ export const query = graphql`
         atomicMass
         group
         period
+        meltingPoint
+        boilingPoint
+        description
+        block
+        discoveryDate
+        discoveredBy
         elementGroup {
           name
           bgColor
           borderColor
           bgColorRGB
+          borderColorRGB
         }
       }
     }

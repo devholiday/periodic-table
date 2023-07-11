@@ -19,6 +19,9 @@
 .gridItem {
     display: block;
     position: relative;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .gridItem::before {
     color: rgb(75 85 99);

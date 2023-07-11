@@ -1,10 +1,11 @@
 .item {
     height: 100%;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.05) inset;
+    border-width: 1px;
+    border-style: solid;
     padding: 3px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .top {
@@ -37,6 +38,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    font-weight: 500;
 }
 .name {
     font-size: 11px;

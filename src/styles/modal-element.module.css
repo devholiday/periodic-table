@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+    height: 370px;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    max-width: 420px;
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.desc {
+    line-height: 16px;
+    margin-bottom: 10px;
+}
+.row {
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 3px 0;
+    height: 36px;
+    align-items: center;
+}
+.row:last-child {
+    border-bottom: none;
+}
+.rowValue {
+    font-weight: 400;
+}
+
+.atomicNumber {
+    font-size: 36px;
+}
+.symbol {
+    font-size: 60px;
+}
+.name {
+    font-size: 24px;
+}
+.elementGroupName {
+    margin-top: 4px;
+}

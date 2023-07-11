@@ -25,6 +25,7 @@ body,html {
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
+    color: #111827;
 }
 
 *,:after,:before {
