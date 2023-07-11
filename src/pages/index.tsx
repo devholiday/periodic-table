@@ -35,8 +35,8 @@ const Home:React.FC<PageProps&Data> = ({data}) => {
       <div className={styles.gridContainer}>
         {
           grid.map((element, i) => (
-            <div key={i} className={styles.gridItem}>
-              {element ? <Element element={element} /> : <div></div>}              
+            <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
+              {element ? <Element element={element} /> : <div></div>}
             </div>
           ))
         }
@@ -45,7 +45,7 @@ const Home:React.FC<PageProps&Data> = ({data}) => {
       <div className={styles.gridContainerWOGroup}>
         {
           gridWithEmptyGroup.map((element, i) => (
-            <div key={i} className={styles.gridItem}>
+            <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
               {element && <Element element={element} /> }
             </div>
           ))

@@ -1,15 +1,130 @@
 .gridContainer {
     display: grid;
     gap: 4px;
-    grid-template-columns: repeat(18, 80px);
+    grid-template-columns: repeat(18, minmax(60px, 1fr));
     grid-template-rows: repeat(7, 80px);
+    padding: 10px 25px;
+    justify-content: center;
+    width: 100%;
 }
 .gridContainerWOGroup {
     display: grid;
     gap: 4px;
-    grid-template-columns: repeat(15, 80px);
+    grid-template-columns: repeat(18, minmax(60px, 1fr));
     grid-template-rows: repeat(2, 80px);
+    padding: 10px 25px;
+    justify-content: center;
+    width: 100%;
 }
 .gridItem {
     display: block;
+    position: relative;
+}
+.gridItem::before {
+    color: rgb(75 85 99);
+    display: block;
+    font-size: 11px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: -20px;
+    width: 100%;
+}
+.gridItem::after {
+    display: block;
+    position: relative;
+    transform: translateY(-50%);
+    color: rgb(75 85 99);
+    display: block;
+    font-size: 11px;
+    left: -63%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+}
+.item1:before {
+    content: "1";
+}
+.item4:before {
+    content: "2";
+}
+.item21:before {
+    content: "3";
+}
+.item22:before {
+    content: "4";
+}
+.item23:before {
+    content: "5";
+}
+.item24:before {
+    content: "6";
+}
+.item25:before {
+    content: "7";
+}
+.item26:before {
+    content: "8";
+}
+.item27:before {
+    content: "9";
+}
+.item28:before {
+    content: "10";
+}
+.item29:before {
+    content: "11";
+}
+.item30:before {
+    content: "12";
+}
+.item5:before {
+    content: "13";
+}
+.item6:before {
+    content: "14";
+}
+.item7:before {
+    content: "15";
+}
+.item8:before {
+    content: "16";
+}
+.item9:before {
+    content: "17";
+}
+.item2:before {
+    content: "18";
+
+}
+
+.item1::after {
+    content: "1";
+
+}
+.item3::after {
+    content: "2";
+}
+.item11::after {
+    content: "3";
+}
+.item19::after {
+    content: "4";
+}
+.item37::after {
+    content: "5";
+}
+.item55::after {
+    content: "6";
+}
+.item87::after {
+    content: "7";
+}
+
+.item57 {
+    grid-column: 4 / 4;
+}
+.item89 {
+    grid-column: 4 / 4;
 }

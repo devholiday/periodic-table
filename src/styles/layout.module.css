@@ -3,19 +3,8 @@
 }
 .heading {
     display: block;
-}
-.navLinks {
     display: block;
-}
-.navLinkItem {
-    display: block;
-}
-.navLinkText {
-    display: block;
-}
-.site-title {
-    font-size: 3rem;
-    color: gray;
-    font-weight: 700;
-    margin: 3rem 0;
+    padding: 10px;
+    font-size: 26px;
+    text-align: center;
 }
