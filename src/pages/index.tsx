@@ -12,7 +12,7 @@ import * as styles from "../styles/grid.module.css"
 type Data = {
   data: {
     allMongodbPeriodicTableElements: {
-      nodes: [NodeType]
+      nodes: NodeType[]
     }
   }
 }
@@ -21,21 +21,6 @@ const Home:React.FC<PageProps&Data> = ({data}) => {
   const [element, setElement] = React.useState<NodeType|undefined>();
   const [activeElement, setActiveElement] = React.useState(false);
   const handleChangeElement = React.useCallback(() => setActiveElement(!activeElement), [activeElement]);
-
-  const grid = [];
-  const gridWithEmptyGroup = [];
-
-  for (let i=1; i < 9; i++) {
-    for (let j=1; j < 19; j++) {
-      grid.push(data.allMongodbPeriodicTableElements.nodes.find((node:NodeType) => node.period === i && node.group === j));
-    }
-  }
-
-  for (let i=57; i < 104; i++) {
-    if (i > 71 && i < 89) continue;
-
-    gridWithEmptyGroup.push(data.allMongodbPeriodicTableElements.nodes.find((n:NodeType) => n.atomicNumber === i));
-  }
 
   const showElement = (element: NodeType): void => {
     setElement(element);
@@ -53,24 +38,18 @@ const Home:React.FC<PageProps&Data> = ({data}) => {
               <ModalElement element={element} />
           </Modal>,
           document.body
-      )}   
+      )}
 
       <Layout pageTitle="Periodic Table of Elements">
         <div className={styles.gridContainer}>
-          {
-            grid.map((element, i) => (
-              <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
-                {element ? <Element showElement={showElement} element={element} /> : <div></div>}
-              </div>
-            ))
-          }
-        </div>
+          <div className={styles.gridItem + ' ' + styles.placeholderElement}>
+            <Element legend={true}  showElement={showElement} element={data.allMongodbPeriodicTableElements.nodes[16]} />
+          </div>
 
-        <div className={styles.gridContainerWOGroup}>
           {
-            gridWithEmptyGroup.map((element, i) => (
-              <div key={i} className={styles.gridItem + ' ' + styles['item'+element?.atomicNumber]}>
-                {element && <Element showElement={showElement} element={element} /> }
+            data.allMongodbPeriodicTableElements.nodes.map((element, i) => (
+              <div key={i} className={styles.gridItem + ' ' + styles['item'+element.atomicNumber]}>
+                <Element showElement={showElement} element={element} />
               </div>
             ))
           }
@@ -83,7 +62,7 @@ export default Home
 
 export const query = graphql`
   query {
-    allMongodbPeriodicTableElements {
+    allMongodbPeriodicTableElements(sort: { atomicNumber: ASC }) {
       totalCount
       nodes {
         id

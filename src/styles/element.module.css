@@ -28,7 +28,6 @@
     align-items: center;
     display: flex;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
 .symbol {
@@ -45,6 +44,39 @@
     text-align: center;
     font-weight: 500;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.legend .legendItem {
+    position: relative;
+}
+.legend .legendItem:after {
+    font-size: 10px;
+    font-weight: 300;
+    color: #4b5563;
+    border: 0 #000 solid;
+    border-bottom-width: 1px;
+    border-color: rgb(209 213 219);
+    border-style: dashed;
+    display: block;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    position: absolute;
+    text-align: left;
+    top: 50%;
+    white-space: nowrap;
+}
+.legend .legendItem:after {
+    content: attr(data-tooltip);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.legend .legendItemRight:after {
+    left: 100%;
+    text-align: left;
+}
+
+.legend .legendItemLeft:after {
+    right: 100%;
+    text-align: right
 }
