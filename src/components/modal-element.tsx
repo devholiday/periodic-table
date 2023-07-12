@@ -1,8 +1,8 @@
 import * as React from "react"
-import { NodeType } from "../types/node"
+import { ElementType } from "../types/node"
 import * as styles from "../styles/modal-element.module.css"
 
-const ModalElement: React.FC<{element: NodeType|undefined}> = ({element}) => {
+const ModalElement: React.FC<{element: ElementType|undefined}> = ({element}) => {
     if (!element) {
         return <></>;
     }

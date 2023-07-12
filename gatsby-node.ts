@@ -27,10 +27,8 @@ export const createResolvers: GatsbyNode["createResolvers"] = ({ createResolvers
                         } 
                     });
 
-
                     const arBgColor = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(group.bgColor);
                     const bgColorRGB = arBgColor ? parseInt(arBgColor[1], 16)+','+parseInt(arBgColor[2], 16)+','+parseInt(arBgColor[3], 16) : null;
-
 
                     const arBorderColor = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(group.borderColor);
                     const borderColorRGB = arBorderColor ? parseInt(arBorderColor[1], 16)+','+parseInt(arBorderColor[2], 16)+','+parseInt(arBorderColor[3], 16) : null;
@@ -44,6 +42,26 @@ export const createResolvers: GatsbyNode["createResolvers"] = ({ createResolvers
                     };
                 },
             },
+        },
+        mongodbPeriodic_tableElementgroups: {
+            bgColorRGB: {
+                type: "String",
+                resolve: async (source) => {
+                    const arBgColor = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(source.bgColor);
+                    const bgColorRGB = arBgColor ? parseInt(arBgColor[1], 16)+','+parseInt(arBgColor[2], 16)+','+parseInt(arBgColor[3], 16) : null;
+
+                    return bgColorRGB;
+                },
+            },
+            borderColorRGB: {
+                type: "String",
+                resolve: async (source) => {
+                    const arBorderColor = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(source.borderColor);
+                    const borderColorRGB = arBorderColor ? parseInt(arBorderColor[1], 16)+','+parseInt(arBorderColor[2], 16)+','+parseInt(arBorderColor[3], 16) : null;
+                    
+                    return borderColorRGB;
+                },
+            }
         },
     });
 }

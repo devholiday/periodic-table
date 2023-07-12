@@ -29,6 +29,7 @@
     display: flex;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 .symbol {
     font-size: 24px;
@@ -45,6 +46,7 @@
     font-weight: 500;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .legend .legendItem {
@@ -75,8 +77,36 @@
     left: 100%;
     text-align: left;
 }
-
 .legend .legendItemLeft:after {
     right: 100%;
     text-align: right
+}
+.legend .name, .legend .atomicMass {
+    overflow: unset;
+}
+
+@media only screen and (max-width: 1200px) {
+    .atomicMass {
+        display: none;
+    }
+    .name {
+        display: none;
+    }
+    .top {
+        justify-content: center;
+    }
+    .symbol {
+        font-size: 20px;
+    }
+    .atomicNumber {
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .symbol {
+        font-size: 16px;
+    }
+    .atomicNumber {
+        font-size: 11px;
+    }
 }

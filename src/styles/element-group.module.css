@@ -1,0 +1,4 @@
+.elementGroup {
+    display: flex;
+    flex-direction: row;
+}

@@ -181,3 +181,35 @@
 .item71, .item103 {
     grid-column-start: 18;
 }
+
+.gridContainerElGroups {
+    display: grid;
+    justify-content: right;
+    padding: 10px 25px;
+    margin-top: 5px;
+    gap: 2px;
+    grid-template-columns: 120px 180px 150px 180px;
+}
+.gridItemGroup {
+    display: flex;
+    flex-direction: revert;
+    align-items: center;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 670px) {
+    .gridContainerElGroups {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .gridItem::after {
+        content: "";
+    }
+    .gridItem::before {
+        content: "";
+    }
+    .placeholderElement {
+        display: none;
+    }
+}

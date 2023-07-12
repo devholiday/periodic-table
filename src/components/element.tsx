@@ -1,10 +1,10 @@
 import * as React from "react"
 import * as styles from "../styles/element.module.css"
-import { NodeType } from "../types/node"
+import { ElementType } from "../types/node"
 
 type ComponentProps = {
-    element: NodeType,
-    showElement: (element:NodeType) => void
+    element: ElementType,
+    showElement: (element:ElementType) => void
     legend?: boolean
 }
 
@@ -12,7 +12,7 @@ const Element: React.FC<ComponentProps> = ({showElement, element, legend}) => {
     return (
         <div className={legend ? styles.item + ' ' +styles.legend : styles.item}
             onClick={() => showElement(element)} 
-            style={{background: `linear-gradient(110deg, rgba(${element.elementGroup.bgColorRGB}, 0.2), rgba(${element.elementGroup.bgColorRGB}, 0.3)`,
+            style={{background: `linear-gradient(110deg, rgba(${element.elementGroup.bgColorRGB}, 0.2), rgba(${element.elementGroup.bgColorRGB}, 0.3))`,
             borderImage: `linear-gradient(rgba(${element.elementGroup.borderColorRGB}, 0.2), rgba(${element.elementGroup.borderColorRGB}, 0.8)) 30`}}>
             <div className={styles.top}>
                 <span className={styles.atomicNumber + ' ' + styles.legendItem + ' ' + styles.legendItemLeft} data-tooltip="Atomic Number">{element.atomicNumber}</span>

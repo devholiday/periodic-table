@@ -4,25 +4,29 @@ import { HeadFC, PageProps, graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Element from "../components/element"
+import ElementGroup from "../components/elementGroup";
 import Modal from "../components/modal";
 import ModalElement from "../components/modal-element";
-import { NodeType } from "../types/node"
+import { ElementType, ElementGroupType } from "../types/node"
 import * as styles from "../styles/grid.module.css"
 
 type Data = {
   data: {
     allMongodbPeriodicTableElements: {
-      nodes: NodeType[]
+      nodes: ElementType[]
+    },
+    allMongodbPeriodicTableElementgroups: {
+      nodes: ElementGroupType[]
     }
   }
 }
 
 const Home:React.FC<PageProps&Data> = ({data}) => {
-  const [element, setElement] = React.useState<NodeType|undefined>();
+  const [element, setElement] = React.useState<ElementType|undefined>();
   const [activeElement, setActiveElement] = React.useState(false);
   const handleChangeElement = React.useCallback(() => setActiveElement(!activeElement), [activeElement]);
 
-  const showElement = (element: NodeType): void => {
+  const showElement = (element: ElementType): void => {
     setElement(element);
     handleChangeElement();
   };
@@ -50,6 +54,16 @@ const Home:React.FC<PageProps&Data> = ({data}) => {
             data.allMongodbPeriodicTableElements.nodes.map((element, i) => (
               <div key={i} className={styles.gridItem + ' ' + styles['item'+element.atomicNumber]}>
                 <Element showElement={showElement} element={element} />
+              </div>
+            ))
+          }
+        </div>
+
+        <div className={styles.gridContainerElGroups}>
+          {
+            data.allMongodbPeriodicTableElementgroups.nodes.map((elementGroup, i) => (
+              <div key={i} className={styles.gridItemGroup}>
+                <ElementGroup elementGroup={elementGroup} />
               </div>
             ))
           }
@@ -85,6 +99,16 @@ export const query = graphql`
           bgColorRGB
           borderColorRGB
         }
+      }
+    }
+    allMongodbPeriodicTableElementgroups {
+      totalCount
+      nodes {
+        name
+        bgColor
+        borderColor
+        bgColorRGB
+        borderColorRGB
       }
     }
   }

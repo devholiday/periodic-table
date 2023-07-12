@@ -1,4 +1,12 @@
-export type NodeType = {
+export type ElementGroupType = {
+  name: string
+  bgColor: string
+  borderColor: string
+  bgColorRGB: string
+  borderColorRGB: string
+}
+
+export type ElementType = {
     period: number
     group: number
     name: string
@@ -11,11 +19,6 @@ export type NodeType = {
     block: string
     discoveryDate: number
     discoveredBy: string
-    elementGroup: {
-      name: string
-      bgColor: string
-      borderColor: string
-      bgColorRGB: string
-      borderColorRGB: string
-    }
+    elementGroup: ElementGroupType
 }
+
